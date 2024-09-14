@@ -1,0 +1,127 @@
+---
+import { Image } from 'astro:assets'
+import Prose from '../components/Prose.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { projects } from './projects/projects'
+import ProjectCard from '../components/ProjectCard.astro'
+---
+
+<BaseLayout
+	title="Wazeer Azizan | Your Front-end Engineer from Malaysia"
+	description="Welcome to Wazeer Azizan portfolio. Explore my skills in Front-end engineering, web development, and my latest projects."
+>
+	<div class="container">
+		<div class="mb-10 w-full gap-16 md:flex md:items-center">
+			<div class="text-pretty leading-9">
+				<h1 class="mb-4 text-3xl font-bold">Hi There 👋, Wazeer Here!</h1>
+				<Prose>
+					<div class="text-lg">
+						<p>
+							I am a Front-end Engineer from Malaysia. I love sharing what i know on devaradise.com,
+							and sometime i also share freebies like this. I'm also active on dev.to and twitter.
+						</p>
+						<p>
+							I made Devolio to help you easily set up your own blog and portfolio website. It's a
+							static site built with Astro and Tailwind CSS, and you can deploy it on platforms like
+							Netlify, Vercel, or Cloudflare Pages.
+						</p>
+					</div>
+				</Prose>
+			</div>
+
+			<Image
+				src="/wazeer.jpg"
+				alt="Muhammad Wazeer Azizan"
+				title="Wazeer Azizan"
+				width={300}
+				height={300}
+				class="mx-4 -rotate-3 rounded-3xl md:mx-0"
+			/>
+		</div>
+
+		<div class="mb-12 mt-6">
+			<div class="mb-1 flex justify-between gap-2">
+				<h2 class="mb-3 text-lg font-bold">My Stack</h2>
+			</div>
+			<ul class="flex flex-wrap items-center gap-4">
+				<li class="rounded-xl border p-4 dark:border-zinc-700 dark:bg-white/90">
+					<Image src="/vue-svgrepo-com.svg" alt="VueJS" title="VueJS" width={32} height={32} />
+				</li>
+				<li class="rounded-xl border p-4 dark:border-zinc-700 dark:bg-white/90">
+					<Image
+						src="/react-javascript-js-framework-facebook-svgrepo-com.svg"
+						alt="ReactJS"
+						title="ReactJS"
+						width={32}
+						height={32}
+					/>
+				</li>
+				<li class="rounded-xl border p-4 dark:border-zinc-700 dark:bg-white/90">
+					<Image src="/nuxt-svgrepo-com.svg" alt="NuxtJS" title="NuxtJS" width={32} height={32} />
+				</li>
+				<li class="rounded-xl border p-4 dark:border-zinc-700 dark:bg-white/90">
+					<Image
+						src="/mysql-logo-svgrepo-com.svg"
+						alt="MySQL"
+						title="MySQL"
+						width={32}
+						height={32}
+					/>
+				</li>
+				<li class="rounded-xl border p-4 dark:border-zinc-700 dark:bg-white/90">
+					<Image
+						src="/express-svgrepo-com.svg"
+						alt="ExpressJS"
+						title="ExpressJS"
+						width={32}
+						height={32}
+					/>
+				</li>
+				<li class="rounded-xl border p-4 dark:border-zinc-700 dark:bg-white/90">
+					<Image src="/icons8-mongodb.svg" alt="MongoDB" title="MongoDB" width={32} height={32} />
+				</li>
+				<li class="rounded-xl border p-4 dark:border-zinc-700 dark:bg-white/90">
+					<Image
+						src="/icons8-tailwind-css.svg"
+						alt="TailwindCSS"
+						title="TailwindCSS"
+						width={32}
+						height={32}
+					/>
+				</li>
+				<li class="rounded-xl border p-4 dark:border-zinc-700 dark:bg-white/90">
+					<Image
+						src="/icons8-prisma-orm.svg"
+						alt="PrismaORM"
+						title="PrismaORM"
+						width={32}
+						height={32}
+					/>
+				</li>
+				<li class="rounded-xl border p-4 dark:border-zinc-700 dark:bg-white/90">
+					<Image src="/Sequelize.svg" alt="Sequelize" title="Sequelize" width={32} height={32} />
+				</li>
+				<li class="rounded-xl border p-4 dark:border-zinc-700 dark:bg-white/90">
+					<Image src="/Node.js.svg" alt="NodeJS" title="NodeJS" width={32} height={32} />
+				</li>
+			</ul>
+		</div>
+
+		<div class="mb-12 mt-6">
+			<div class="mb-1 flex items-center justify-between gap-2 border-b dark:border-b-zinc-700">
+				<h2 class="mb-3 text-lg font-bold">Recent Posts</h2>
+				<a href="/blog" class="text-sm font-bold">View All</a>
+			</div>
+		</div>
+
+		<div class="mb-12 mt-6">
+			<div class="mb-1 flex justify-between gap-2">
+				<h2 class="mb-3 text-lg font-bold">My Projects</h2>
+				<a href="/projects/" class="text-sm font-bold">All Projects</a>
+			</div>
+			<div class="grid grid-cols-12 gap-5">
+				{projects && projects.length > 0 && projects.map((project) => <ProjectCard {...project} />)}
+			</div>
+		</div>
+	</div>
+</BaseLayout>

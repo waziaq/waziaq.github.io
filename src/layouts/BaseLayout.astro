@@ -1,0 +1,167 @@
+---
+import { Image } from 'astro:assets'
+
+interface Props {
+	title: string
+	description?: string
+}
+
+const { title, description } = Astro.props
+const today = new Date()
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description || 'Welcome to Our Blog'} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#fff" />
+		<link rel="canonical" href="https://waziaq.my" />
+		<title>{title}</title>
+		<script is:inline>
+			if (
+				localStorage.theme === 'dark' ||
+				(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+				document.documentElement.classList.add('dark')
+			} else {
+				document.documentElement.classList.remove('dark')
+			}
+		</script>
+	</head>
+	<body class="bg-white pt-6 sm:pt-8 dark:bg-zinc-900 dark:text-zinc-100">
+		<navbar>
+			<div class="container">
+				<div class="flex items-center justify-between">
+					<a href="/" class="text-3xl font-bold">W<span class="text-2xl text-lime-500">z.</span></a>
+					<div>
+						<ul class="flex items-center gap-4">
+							<li>
+								<a href="https://github.com/waziaq">
+									<Image
+										src={'/github-mark-white.svg'}
+										class="hidden dark:inline"
+										alt="Github"
+										title="Github"
+										width={24}
+										height={24}
+									/>
+									<Image
+										src={'/github-mark.svg'}
+										class="inline dark:hidden"
+										alt="Github"
+										title="Github"
+										width={24}
+										height={24}
+									/>
+								</a>
+							</li>
+							<li class="flex">
+								<button id="mode-toggle" aria-label="Toggle dark mode" title="Toggle dark mode" class="text-2xl">
+									<svg
+										class="sun hidden dark:inline"
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="lucide lucide-sun"
+										><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path
+											d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path
+											d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"
+										></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"
+										></path></svg
+									>
+									<svg
+										class="moon dark:hidden"
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="lucide lucide-moon"
+									>
+										<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg
+									>
+								</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</navbar>
+		<main class="min-h-[calc(100vh-160px)] py-12">
+			<slot />
+		</main>
+	</body>
+	<footer class="container">
+		<div class="fixed bottom-8 left-1/2 z-[999] w-auto max-w-full -translate-x-1/2 px-3">
+			<div
+				class="flex items-center rounded-full border bg-white px-2.5 leading-tight backdrop-blur-md dark:border-zinc-700 dark:bg-zinc-900/75"
+			>
+				<ul class="flex items-center gap-8 px-3">
+					<li class="py-3">
+						<a href="/" aria-label="Home page">
+							<svg
+								class="dark:fill-current dark:text-lime-500"
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								><path
+									d="M12 1l-12 12h3v10h18v-10h3l-12-12zm0 18c-1.607-1.626-3-2.84-3-4.027 0-1.721 2.427-2.166 3-.473.574-1.695 3-1.246 3 .473 0 1.187-1.393 2.402-3 4.027zm8-11.907l-3-3v-2.093h3v5.093z"
+								></path></svg
+							>
+						</a>
+					</li>
+					<li class="py-3">
+						<a href="/projects">Projects</a>
+					</li>
+					<li class="py-3">
+						<a href="/blog">Blog</a>
+					</li>
+					<li class="w-full py-3">
+						<a href="/about">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="border-t py-4 dark:border-t-zinc-700">
+			<div
+				class="flex flex-wrap md:flex-nowrap justify-between text-sm text-zinc-500 dark:text-zinc-300"
+			>
+				<div>Copyright © {today.getFullYear()} Waziaq.MY</div>
+				<div class="prose dark:prose-invert flex divide-x text-sm md:justify-center">
+					<a href="#" class="pr-4">Newsletter</a>
+					<a href="#" class="px-4">Buy me a Coffee</a>
+					<a href="#" class="pl-4">RSS</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+</html>
+
+<script is:inline>
+	document.getElementById('mode-toggle')?.addEventListener('click', () => {
+		console.log(localStorage.theme)
+		if (localStorage.theme === 'dark') {
+			localStorage.theme = 'light'
+			document.documentElement.classList.remove('dark')
+		} else {
+			localStorage.theme = 'dark'
+			document.documentElement.classList.add('dark')
+		}
+	})
+</script>
