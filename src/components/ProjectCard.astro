@@ -185,32 +185,37 @@ const displayDate = formatDate(props.createdAt);
           }
         </div>
 
-        <div class="mt-4 flex items-center justify-between">
-          <a
-            id={`project-modal-link-${props.slug}`}
-            href={displayLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-1 rounded-full border border-zinc-300 px-2 py-1 text-xs font-medium no-underline transition-all duration-700 hover:border-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:hover:border-zinc-300 dark:hover:bg-zinc-800"
-          >
-            Visit
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              class="opacity-70"
-            >
-              <path
-                d="M13 5l7 7-7 7M5 12h14"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
-          </a>
-        </div>
+        {
+          displayLink && displayLink !== "#" && (
+            <div class="mt-4 flex items-center justify-between">
+              <a
+                id={`project-modal-link-${props.slug}`}
+                href={displayLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1 rounded-full border border-zinc-300 px-2 py-1 text-xs font-medium no-underline transition-all duration-700 hover:border-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:hover:border-zinc-300 dark:hover:bg-zinc-800"
+              >
+                Visit
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  class="opacity-70"
+                >
+                  <path
+                    d="M13 5l7 7-7 7M5 12h14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+          )
+        }
 
         <div class="mt-2 text-xs text-zinc-300 dark:text-zinc-700">
           {displayNote}
