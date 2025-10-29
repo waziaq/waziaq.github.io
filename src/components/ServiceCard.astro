@@ -1,0 +1,63 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  technologies?: string[];
+  ctaText: string;
+  ctaHref: string;
+}
+
+const { title, description, technologies = [], ctaText, ctaHref } = Astro.props;
+---
+
+<div
+  class="col-span-12 rounded-xl border p-5 shadow-sm sm:col-span-6 xl:col-span-3 dark:border-zinc-700"
+>
+  <div class="space-y-4">
+    <div
+      class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border bg-white text-zinc-700 dark:border-zinc-700 dark:bg-white/90 dark:text-zinc-900"
+    >
+      <slot name="icon" />
+    </div>
+    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-200">
+      {title}
+    </h3>
+    <p class="text-sm text-zinc-600 dark:text-zinc-400">{description}</p>
+  </div>
+
+  {
+    technologies && technologies.length > 0 && (
+      <div class="mt-4 flex flex-wrap gap-2">
+        {technologies.map((tag: string) => (
+          <span class="rounded-2xl border border-zinc-300 px-2 py-0.5 text-xs text-zinc-700 no-underline transition-all duration-700 hover:border-zinc-700 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-300">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )
+  }
+
+  <div class="mt-6">
+    <a
+      href={ctaHref}
+      class="inline-flex items-center gap-2 rounded-full border border-zinc-300 px-3 py-1 text-sm font-medium no-underline transition-all duration-700 hover:border-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:hover:border-zinc-300 dark:hover:bg-zinc-800"
+    >
+      {ctaText}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        class="opacity-70"
+      >
+        <path
+          d="M13 5l7 7-7 7M5 12h14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </a>
+  </div>
+</div>
